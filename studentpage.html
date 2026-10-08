@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Attendance System</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #eef2f7;
+}
+
+
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background: #1e3c72;
+    color: white;
+    position: fixed;
+}
+
+.sidebar h2 {
+    text-align: center;
+    padding: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px;
+    cursor: pointer;
+}
+
+.sidebar ul li:hover {
+    background: #2a5298;
+}
+
+
+.main {
+    margin-left: 220px;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background: #2a5298;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1e3c72;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+.v{
+    color: white;
+    background-color: #1e3c72;
+}
+button:hover{
+    background-color: red;
+
+}
+
+
+@media(max-width: 768px){
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .main {
+        margin-left: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>Attendance</h2>
+    <ul>
+        <li onclick="showPage('dashboard')">Dashboard</li>
+        <li onclick="showPage('attendance')">View Attendance</li>
+        <li onclick="showPage('report')">Download Report</li>
+        <li onclick="showPage('settings')">Settings</li>
+    </ul>
+    <a href="homepage.html"><button class="v">LOG OUT</button></a>
+</div>
+
+<div class="main">
+
+<h2>Student Dashboard </h2>
+
+<div id="dashboard" class="card">
+    <h2>Attandense of Student</h2>
+    <p>Total Classes: <b>34</b></p>
+    <p>Present: <b>88%</b></p>
+</div>
+
+
+<div id="attendance" class="card" style="display:none;">
+    <h2>Attendance</h2>
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td>Math</td>
+            <td>11-Apr</td>
+            <td>Present</td>
+        </tr>
+        <tr>
+            <td>English</td>
+            <td>12-Apr</td>
+            <td>Absent</td>
+        </tr>
+        <tr>
+            <td>Science</td>
+            <td>13-Apr</td>
+            <td>Present</td>
+        </tr>
+    </table>
+</div>
+
+
+<div id="report" class="card" style="display:none;">
+    <h2>Download Report</h2>
+    <button onclick="download('PDF')">Download PDF</button>
+    <button onclick="download('Excel')">Download Excel</button>
+</div>
+
+
+<div id="settings" class="card" style="display:none;">
+    <h2>Profile Settings</h2>
+    
+    <input type="email" placeholder="Email"><br><br>
+    <input type="number" placeholder="Enter OTP"><br><br>
+    <input type="password" placeholder="New Password"><br><br>
+    <button type="submit">Save Changes</button>
+</div>
+
+</div>
+
+<script>
+function showPage(page) {
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('attendance').style.display = 'none';
+    document.getElementById('report').style.display = 'none';
+    document.getElementById('settings').style.display = 'none';
+
+    document.getElementById(page).style.display = 'block';
+}
+
+function download(type) {
+    alert(type + " file downloading...");
+}
+</script>
+
+</body>
+</html>

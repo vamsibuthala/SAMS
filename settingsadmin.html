@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Settings</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+}
+
+.navbar{
+    height:60px;
+    width:98%;
+    background:#2c3e50;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    position:fixed;
+}
+
+.sidebar{
+    width:220px;
+    height:100vh;
+    background:#34495e;
+    position:fixed;
+    padding-top:20px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    padding:12px 20px;
+    text-decoration:none;
+}
+
+.sidebar a:hover{
+    background:#1abc9c;
+}
+
+.main{
+    margin-left:220px;
+    padding:20px;
+}
+
+.form-section{
+    background:white;
+    padding:20px;
+    margin-top:20px;
+    border-radius:10px;
+}
+
+.form-section input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.form-section button{
+    background:#1abc9c;
+    color:white;
+    padding:10px 15px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.form-section button:hover{
+    background:#16a085;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <button onclick="toggleSidebar()">☰</button>
+    <h2>Settings</h2>
+</div>
+
+<div class="sidebar" id="sidebar">
+    <a href="adminpage.html">Dashboard</a>
+    <a href="admin.html">Users</a>
+    <a href="settingsadmin.html">Settings</a>
+</div>
+
+<div class="main">
+    <br><br>
+    <h1>System Settings</h1>
+
+    <div class="form-section">
+        <h3>Change Password</h3>
+        <input type="password" placeholder="New Password">
+        <input type="password" placeholder="Confirm Password">
+        <button>Update Password</button>
+    </div>
+
+    <div class="form-section">
+        <h3>Update System Info</h3>
+        <input type="text" placeholder="Institute Name">
+        <input type="text" placeholder="Address">
+        <button>Save Changes</button>
+    </div>
+</div>
+
+<script>
+function toggleSidebar(){
+    var sidebar = document.getElementById("sidebar");
+    sidebar.style.display = (sidebar.style.display === "none") ? "block" : "none";
+}
+</script>
+
+</body>
+</html>

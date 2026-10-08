@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Attendance Management System</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+
+    }
+
+    body {
+        height: 100vh;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        display: flex;
+        flex-direction: column;
+    }
+
+    h1 {
+        text-align: center;
+        padding: 20px;
+        color: white;
+        letter-spacing: 1px;
+    }
+
+    .main {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .button-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+        background: rgb(98, 176, 112);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        width: 400px;
+    }
+
+    .btn {
+        width: 150px;
+        height: 90px;
+        border: none;
+        border-radius: 10px;
+        background: linear-gradient(45deg, #ff9800, #ffb74d);
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        transform: scale(1.1);
+        background: linear-gradient(45deg, #fb8c00, #ffa726);
+    }
+
+</style>
+</head>
+
+<body>
+
+<h1> VEMU STUDENT ATTENDENCE MANAGEMENT SYSTEM</h1>
+
+<div class="main">
+    <div class="button-group">
+        <a href="adminlogin.html"><button class="btn">ADMIN</button></a>
+       <a href="hodlogin.html"> <button class="btn">HOD</button></a>
+        <a href="facultylogin.html"> <button class="btn">FACULTY</button></a>
+         <a href="studentlogin.html"><button class="btn">STUDENT</button></a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Faculty Dashboard</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+}
+
+.navbar{
+    height:60px;
+    width:98%;
+    background:#2c3e50;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    position:fixed;
+}
+
+.sidebar{
+    width:220px;
+    height:100vh;
+    background:#34495e;
+    position:fixed;
+    padding-top:20px;
+    overflow:auto;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    padding:12px 20px;
+    text-decoration:none;
+    cursor:pointer;
+}
+
+.sidebar a:hover{
+    background:#1abc9c;
+}
+
+.main{
+    margin-left:220px;
+    padding:20px;
+}
+
+#v{
+    font-size:small;
+    font-weight:bold;
+    border-radius:10px;
+    height:30px;
+    width:100px;
+    color:blue;
+}
+
+.button-group {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:25px;
+    background:white;
+    padding:40px;
+    border-radius:15px;
+    width:400px;
+    margin:auto;
+}
+
+.btn {
+    width:150px;
+    height:90px;
+    border:none;
+    border-radius:10px;
+    background:#2c3e50;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.btn:hover {
+    background:lightskyblue;
+}
+
+.form-section{
+    background:white;
+    padding:20px;
+    margin-top:20px;
+    border-radius:10px;
+}
+
+input, select{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th, td{
+    padding:10px;
+    border:1px solid #ccc;
+}
+
+th{
+    background:#2c3e50;
+    color:white;
+}
+
+.save-btn{
+    padding:10px 20px;
+    border:none;
+    background:#2c3e50;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.save-btn:hover{
+    background:#1abc9c;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <button onclick="toggleSidebar()">☰</button>
+    <h2>Student Attendance Management System</h2>
+    <a href="homepage.html"><button id="v">LOG OUT</button></a>
+</div>
+
+<div class="sidebar" id="sidebar">
+    <a href="#">Dashboard</a>
+    <a href="#">Users</a>
+    <a href="#">Attendance</a>
+    <a href="#">Reports</a>
+    <a onclick="showLoginHistory()">Login History</a>
+    <a onclick="showPasswordSection()">Change Password</a>
+</div>
+
+<div class="main">
+<br><br>
+<h1>Faculty Dashboard</h1>
+
+<!-- BUTTONS -->
+<div class="button-group">
+    <button class="btn" onclick="showMark()">Mark Attendance</button>
+    <button class="btn" onclick="showView()">View Attendance</button>
+</div>
+
+<!-- MARK ATTENDANCE -->
+<div id="markSection" class="form-section" style="display:none;">
+    <h3>Mark Attendance</h3>
+
+    <input type="text" id="studentName" placeholder="Student Name" required>
+    <input type="date" id="date" required>
+
+    <select id="status">
+        <option value="Present">Present</option>
+        <option value="Absent">Absent</option>
+    </select>
+
+    <button class="save-btn" onclick="saveAttendance()">Save</button>
+</div>
+
+<!-- VIEW ATTENDANCE -->
+<div id="viewSection" class="form-section" style="display:none;">
+    <h3>Attendance Report</h3>
+    <div id="tableData"></div>
+</div>
+
+<!-- LOGIN HISTORY -->
+<div id="historySection" class="form-section" style="display:none;">
+    <h3>Login History</h3>
+    <div id="historyData"></div>
+</div>
+
+<!-- CHANGE PASSWORD -->
+<div id="passwordSection" class="form-section" style="display:none;">
+    <h3>Change Password</h3>
+
+    <input type="password" id="newPassword" placeholder="Enter New Password">
+    <button class="save-btn" onclick="changePassword()">Save Password</button>
+
+    <p id="passMsg"></p>
+</div>
+
+</div>
+
+<script>
+
+// PASSWORD VARIABLE
+let savedNewPassword = "";
+
+// Add Login History Automatically
+let loginHistory = JSON.parse(localStorage.getItem("loginHistory")) || [];
+loginHistory.push("Logged in on: " + new Date().toLocaleString());
+localStorage.setItem("loginHistory", JSON.stringify(loginHistory));
+
+// Sidebar
+function toggleSidebar(){
+    let sidebar = document.getElementById("sidebar");
+    sidebar.style.display = (sidebar.style.display === "none") ? "block" : "none";
+}
+
+// Show Sections
+function showMark(){
+    hideAll();
+    markSection.style.display = "block";
+}
+
+function showView(){
+    hideAll();
+    viewSection.style.display = "block";
+    displayAttendance();
+}
+
+function showLoginHistory(){
+    hideAll();
+    historySection.style.display = "block";
+
+    let data = JSON.parse(localStorage.getItem("loginHistory")) || [];
+    let output = "<ul>";
+
+    data.forEach(d=>{
+        output += "<li>" + d + "</li>";
+    });
+
+    output += "</ul>";
+    historyData.innerHTML = output;
+}
+
+function showPasswordSection(){
+    hideAll();
+    passwordSection.style.display = "block";
+}
+
+function hideAll(){
+    markSection.style.display = "none";
+    viewSection.style.display = "none";
+    historySection.style.display = "none";
+    passwordSection.style.display = "none";
+}
+
+// Save Attendance
+function saveAttendance(){
+    let name = studentName.value.trim();
+    let dateVal = date.value;
+    let statusVal = status.value;
+
+    if(name === "" || dateVal === ""){
+        alert("Fill all fields");
+        return;
+    }
+
+    let data = JSON.parse(localStorage.getItem("attendance")) || [];
+
+    data.push({name, date:dateVal, status:statusVal});
+
+    localStorage.setItem("attendance", JSON.stringify(data));
+
+    alert("Attendance Saved");
+    studentName.value="";
+}
+
+// Display Table
+function displayAttendance(){
+    let data = JSON.parse(localStorage.getItem("attendance")) || [];
+
+    let output = `
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    `;
+
+    data.forEach(d=>{
+        output += `
+        <tr>
+            <td>${d.name}</td>
+            <td>${d.date}</td>
+            <td>${d.status}</td>
+        </tr>`;
+    });
+
+    output += "</table>";
+
+    tableData.innerHTML = output;
+}
+
+// Change Password
+function changePassword(){
+    savedNewPassword = newPassword.value;
+    localStorage.setItem("facultyPassword", savedNewPassword);
+
+    passMsg.innerHTML = "Password Changed Successfully";
+    newPassword.value = "facultypassword";
+}
+
+</script>
+
+</body>
+</html>

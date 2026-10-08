@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Dashboard</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+}
+
+.navbar{
+    height:60px;
+    width:98%;
+    background:#2c3e50;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    position:fixed;
+}
+
+.sidebar{
+    width:220px;
+    height:100vh;
+    background:#34495e;
+    position:fixed;
+    padding-top:20px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    padding:12px 20px;
+    text-decoration:none;
+}
+
+.sidebar a:hover{
+    background:#1abc9c;
+}
+
+.main{
+    margin-left:220px;
+    padding:20px;
+}
+
+#v{
+    font-size:small;
+    font-weight:bold;
+    border-radius:10px;
+    height:30px;
+    width:100px;
+    color:blue;
+}
+
+.form-section{
+    background:white;
+    padding:20px;
+    margin-top:20px;
+    border-radius:10px;
+}
+
+.form-section input, .form-section select{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.form-section button{
+    background:#1abc9c;
+    color:white;
+    padding:10px 15px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.form-section button:hover{
+    background:#16a085;
+}
+
+table{
+    border-collapse: collapse;
+    margin-top:15px;
+}
+
+th, td{
+    text-align:left;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <button onclick="toggleSidebar()">☰</button>
+    <h2>Student Attendance Management System</h2>
+    <a href="homepage.html"><button id="v">LOG OUT</button></a>
+</div>
+
+<div class="sidebar" id="sidebar">
+    <a href="#">Dashboard</a>
+    <a href="#">Users</a>
+    <a href="#">Attendance</a>
+    <a href="#">Reports</a>
+    <a href="#">Settings</a>
+</div>
+
+<div class="main">
+<br><br>
+<h1>HOD Dashboard</h1>
+
+<!-- FACULTY -->
+<div class="form-section">
+<h2>Add Faculty</h2>
+
+<form onsubmit="addFaculty(event)">
+    <input type="text" id="f_name" placeholder="Full Name" required>
+    <input type="email" id="f_email" placeholder="Email" required>
+
+    <select id="f_position">
+        <option>Professor</option>
+        <option>Assistant Professor</option>
+        <option>Lab Professor</option>
+    </select>
+
+    <button type="submit">Add Faculty</button>
+</form>
+
+<h3>Delete Faculty (Enter exact Name & Email)</h3>
+<input type="text" id="df_name" placeholder="Enter Name">
+<input type="email" id="df_email" placeholder="Enter Email">
+<button onclick="removeFaculty()" style="background:red;">Delete Faculty</button>
+
+<div id="facultyList"></div>
+</div>
+
+<!-- STUDENTS -->
+<div class="form-section">
+<h2>Add Student</h2>
+
+<form onsubmit="addStudent(event)">
+    <input type="text" id="s_name" placeholder="Full Name" required>
+    <input type="email" id="s_email" placeholder="Email" required>
+
+    <select id="s_class">
+        <option>Class 1</option>
+        <option>Class 2</option>
+        <option>Class 3</option>
+    </select>
+
+    <button type="submit">Add Student</button>
+</form>
+
+<h3>Delete Student (Enter exact Name & Email)</h3>
+<input type="text" id="ds_name" placeholder="Enter Name">
+<input type="email" id="ds_email" placeholder="Enter Email">
+<button onclick="removeStudent()" style="background:red;">Delete Student</button>
+
+<div id="studentList"></div>
+</div>
+
+</div>
+
+<script>
+// Sidebar Toggle
+function toggleSidebar(){
+    let sidebar = document.getElementById("sidebar");
+    sidebar.style.display = (sidebar.style.display === "none") ? "block" : "none";
+}
+
+// ================= FACULTY =================
+function addFaculty(e){
+    e.preventDefault();
+
+    let name = f_name.value.trim();
+    let email = f_email.value.trim().toLowerCase();
+    let position = f_position.value;
+
+    let faculty = JSON.parse(localStorage.getItem("faculty")) || [];
+
+    // Duplicate check
+    let exists = faculty.some(f => f.email.toLowerCase() === email);
+    if(exists){
+        alert("Email already exists! Enter a different email.");
+        return;
+    }
+
+    faculty.push({name, email, position});
+
+    localStorage.setItem("faculty", JSON.stringify(faculty));
+    displayFaculty();
+}
+
+function removeFaculty(){
+    let name = df_name.value.trim().toLowerCase();
+    let email = df_email.value.trim().toLowerCase();
+
+    if(name === "" || email === ""){
+        alert("Enter BOTH Name and Email");
+        return;
+    }
+
+    let faculty = JSON.parse(localStorage.getItem("faculty")) || [];
+
+    let newFaculty = faculty.filter(f => 
+        !(f.name.toLowerCase() === name && f.email.toLowerCase() === email)
+    );
+
+    if(faculty.length === newFaculty.length){
+        alert("No matching faculty found!");
+    } else {
+        alert("Faculty deleted successfully");
+    }
+
+    localStorage.setItem("faculty", JSON.stringify(newFaculty));
+    displayFaculty();
+}
+
+function displayFaculty(){
+    let faculty = JSON.parse(localStorage.getItem("faculty")) || [];
+
+    let output = `
+    <h3>Faculty List</h3>
+    <table border="1" width="100%" cellpadding="10">
+        <tr style="background:#2c3e50; color:white;">
+            <th>Name</th>
+            <th>Email</th>
+            <th>Position</th>
+        </tr>
+    `;
+
+    faculty.forEach(f => {
+        output += `
+        <tr>
+            <td>${f.name}</td>
+            <td>${f.email}</td>
+            <td>${f.position}</td>
+        </tr>`;
+    });
+
+    output += "</table>";
+
+    document.getElementById("facultyList").innerHTML = output;
+}
+
+// ================= STUDENTS =================
+function addStudent(e){
+    e.preventDefault();
+
+    let name = s_name.value.trim();
+    let email = s_email.value.trim().toLowerCase();
+    let cls = s_class.value;
+
+    let students = JSON.parse(localStorage.getItem("students")) || [];
+
+    // Duplicate check
+    let exists = students.some(s => s.email.toLowerCase() === email);
+    if(exists){
+        alert("Email already exists! Enter a different email.");
+        return;
+    }
+
+    students.push({name, email, cls});
+
+    localStorage.setItem("students", JSON.stringify(students));
+    displayStudents();
+}
+
+function removeStudent(){
+    let name = ds_name.value.trim().toLowerCase();
+    let email = ds_email.value.trim().toLowerCase();
+
+    if(name === "" || email === ""){
+        alert("Enter BOTH Name and Email");
+        return;
+    }
+
+    let students = JSON.parse(localStorage.getItem("students")) || [];
+
+    let newStudents = students.filter(s => 
+        !(s.name.toLowerCase() === name && s.email.toLowerCase() === email)
+    );
+
+    if(students.length === newStudents.length){
+        alert("No matching student found!");
+    } else {
+        alert("Student deleted successfully");
+    }
+
+    localStorage.setItem("students", JSON.stringify(newStudents));
+    displayStudents();
+}
+
+function displayStudents(){
+    let students = JSON.parse(localStorage.getItem("students")) || [];
+
+    let output = `
+    <h3>Student List</h3>
+    <table border="1" width="100%" cellpadding="10">
+        <tr style="background:#2c3e50; color:white;">
+            <th>Name</th>
+            <th>Email</th>
+            <th>Class</th>
+        </tr>
+    `;
+
+    students.forEach(s => {
+        output += `
+        <tr>
+            <td>${s.name}</td>
+            <td>${s.email}</td>
+            <td>${s.cls}</td>
+        </tr>`;
+    });
+
+    output += "</table>";
+
+    document.getElementById("studentList").innerHTML = output;
+}
+
+// Load Data
+window.onload = function(){
+    displayFaculty();
+    displayStudents();
+}
+</script>
+
+</body>
+</html>

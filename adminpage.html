@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Dashboard</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+}
+
+.navbar{
+    height:60px;
+    width:98%;
+    background:#2c3e50;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    position:fixed;
+}
+
+.sidebar{
+    width:220px;
+    height:100vh;
+    background:#34495e;
+    position:fixed;
+    padding-top:20px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    padding:12px 20px;
+    text-decoration:none;
+}
+
+.sidebar a:hover{
+    background:#1abc9c;
+}
+
+.main{
+    margin-left:220px;
+    padding:20px;
+}
+
+#v{
+    font-size:small;
+    font-weight:bold;
+    border-radius:10px;
+    height:30px;
+    width:100px;
+    color:blue;
+}
+
+.form-section{
+    background:white;
+    padding:20px;
+    margin-top:20px;
+    border-radius:10px;
+}
+
+.form-section input, .form-section select{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.form-section button{
+    background:#1abc9c;
+    color:white;
+    padding:10px 15px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.form-section button:hover{
+    background:#16a085;
+}
+
+table{
+    border-collapse: collapse;
+    margin-top:15px;
+}
+
+th, td{
+    text-align:left;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <button onclick="toggleSidebar()">☰</button>
+    <h2>Student Attendance Management System</h2>
+    <a href="homepage.html"><button id="v">LOG OUT</button></a>
+</div>
+
+<div class="sidebar" id="sidebar">
+    <a href="#">Dashboard</a>
+    <a href="#">Users</a>   
+    <a href="settingsadmin.html">Settings</a>
+</div>
+
+<div class="main">
+<br><br>
+<h1>Admin Dashboard</h1>
+
+<!-- HOD -->
+<div class="form-section">
+<h2>Add HOD</h2>
+
+<form onsubmit="addHOD(event)">
+    <input type="text" id="h_name" placeholder="Full Name" required>
+    <input type="email" id="h_email" placeholder="Email" required>
+
+    <button type="submit">Add HOD</button>
+</form>
+
+<h3>Delete HOD (Enter exact Name & Email)</h3>
+<input type="text" id="dh_name" placeholder="Enter Name">
+<input type="email" id="dh_email" placeholder="Enter Email">
+<button onclick="removeHOD()" style="background:red;">Delete HOD</button>
+
+<div id="hodList"></div>
+</div>
+
+<!-- FACULTY -->
+<div class="form-section">
+<h2>Add Faculty</h2>
+
+<form onsubmit="addFaculty(event)">
+    <input type="text" id="f_name" placeholder="Full Name" required>
+    <input type="email" id="f_email" placeholder="Email" required>
+
+    <select id="f_position">
+        <option>Professor</option>
+        <option>Assistant Professor</option>
+        <option>Lab Professor</option>
+    </select>
+
+    <button type="submit">Add Faculty</button>
+</form>
+
+<h3>Delete Faculty (Enter exact Name & Email)</h3>
+<input type="text" id="df_name" placeholder="Enter Name">
+<input type="email" id="df_email" placeholder="Enter Email">
+<button onclick="removeFaculty()" style="background:red;">Delete Faculty</button>
+
+<div id="facultyList"></div>
+</div>
+
+</div>
+
+<script>
+// Sidebar
+function toggleSidebar(){
+    let sidebar = document.getElementById("sidebar");
+    sidebar.style.display = (sidebar.style.display === "none") ? "block" : "none";
+}
+
+// ================= HOD =================
+function addHOD(e){
+    e.preventDefault();
+
+    let name = h_name.value.trim();
+    let email = h_email.value.trim().toLowerCase();
+
+    let hods = JSON.parse(localStorage.getItem("hods")) || [];
+
+    let exists = hods.some(h => h.email === email);
+    if(exists){
+        alert("Email already exists!");
+        return;
+    }
+
+    hods.push({name, email});
+    localStorage.setItem("hods", JSON.stringify(hods));
+    displayHOD();
+}
+
+function removeHOD(){
+    let name = dh_name.value.trim().toLowerCase();
+    let email = dh_email.value.trim().toLowerCase();
+
+    if(!name || !email){
+        alert("Enter Name & Email");
+        return;
+    }
+
+    let hods = JSON.parse(localStorage.getItem("hods")) || [];
+
+    let newHods = hods.filter(h => 
+        !(h.name.toLowerCase() === name && h.email === email)
+    );
+
+    if(hods.length === newHods.length){
+        alert("No match found");
+    } else {
+        alert("HOD deleted");
+    }
+
+    localStorage.setItem("hods", JSON.stringify(newHods));
+    displayHOD();
+}
+
+function displayHOD(){
+    let hods = JSON.parse(localStorage.getItem("hods")) || [];
+
+    let output = `
+    <h3>HOD List</h3>
+    <table border="1" width="100%" cellpadding="10">
+    <tr style="background:#2c3e50;color:white;">
+        <th>Name</th>
+        <th>Email</th>
+    </tr>`;
+
+    hods.forEach(h=>{
+        output += `<tr>
+        <td>${h.name}</td>
+        <td>${h.email}</td>
+        </tr>`;
+    });
+
+    output += "</table>";
+    hodList.innerHTML = output;
+}
+
+// ================= FACULTY =================
+function addFaculty(e){
+    e.preventDefault();
+
+    let name = f_name.value.trim();
+    let email = f_email.value.trim().toLowerCase();
+    let position = f_position.value;
+
+    let faculty = JSON.parse(localStorage.getItem("faculty")) || [];
+
+    let exists = faculty.some(f => f.email === email);
+    if(exists){
+        alert("Email already exists!");
+        return;
+    }
+
+    faculty.push({name,email,position});
+    localStorage.setItem("faculty", JSON.stringify(faculty));
+    displayFaculty();
+}
+
+function removeFaculty(){
+    let name = df_name.value.trim().toLowerCase();
+    let email = df_email.value.trim().toLowerCase();
+
+    if(!name || !email){
+        alert("Enter Name & Email");
+        return;
+    }
+
+    let faculty = JSON.parse(localStorage.getItem("faculty")) || [];
+
+    let newFaculty = faculty.filter(f => 
+        !(f.name.toLowerCase() === name && f.email === email)
+    );
+
+    if(faculty.length === newFaculty.length){
+        alert("No match found");
+    } else {
+        alert("Faculty deleted");
+    }
+
+    localStorage.setItem("faculty", JSON.stringify(newFaculty));
+    displayFaculty();
+}
+
+function displayFaculty(){
+    let faculty = JSON.parse(localStorage.getItem("faculty")) || [];
+
+    let output = `
+    <h3>Faculty List</h3>
+    <table border="1" width="100%" cellpadding="10">
+    <tr style="background:#2c3e50;color:white;">
+        <th>Name</th>
+        <th>Email</th>
+        <th>Position</th>
+    </tr>`;
+
+    faculty.forEach(f=>{
+        output += `<tr>
+        <td>${f.name}</td>
+        <td>${f.email}</td>
+        <td>${f.position}</td>
+        </tr>`;
+    });
+
+    output += "</table>";
+    facultyList.innerHTML = output;
+}
+
+// Load
+window.onload = function(){
+    displayHOD();
+    displayFaculty();
+}
+</script>
+
+</body>
+</html>

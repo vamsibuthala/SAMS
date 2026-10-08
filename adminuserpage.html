@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Users Page</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+}
+
+.navbar{
+    height:60px;
+    width:98%;
+    background:#2c3e50;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    position:fixed;
+}
+
+.sidebar{
+    width:220px;
+    height:100vh;
+    background:#34495e;
+    position:fixed;
+    padding-top:20px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    padding:12px 20px;
+    text-decoration:none;
+}
+
+.sidebar a:hover{
+    background:#1abc9c;
+}
+
+.main{
+    margin-left:220px;
+    padding:20px;
+}
+
+.form-section{
+    background:white;
+    padding:20px;
+    margin-top:20px;
+    border-radius:10px;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th, td{
+    padding:10px;
+    border:1px solid #ccc;
+}
+
+th{
+    background:#2c3e50;
+    color:white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <button onclick="toggleSidebar()">☰</button>
+    <h2>Student Attendance Management System</h2>
+</div>
+
+<div class="sidebar" id="sidebar">
+    <a href="admin.html">Dashboard</a>
+    <a href="#">Users</a>
+    <a href="#">Attendance</a>
+    <a href="#">Reports</a>
+</div>
+
+<div class="main">
+<br><br>
+<h1>Users Page</h1>
+
+<div class="form-section">
+    <h3>Search User</h3>
+    <input type="text" id="search" placeholder="Search by name..." onkeyup="filterUsers()">
+</div>
+
+<div class="form-section">
+    <h3>All Users</h3>
+    <div id="userTable"></div>
+</div>
+
+</div>
+
+<script>
+// Sidebar toggle
+function toggleSidebar(){
+    let sidebar = document.getElementById("sidebar");
+    sidebar.style.display = (sidebar.style.display === "none") ? "block" : "none";
+}
+
+// Load Users
+function loadUsers(){
+    let hods = JSON.parse(localStorage.getItem("hods")) || [];
+    let faculty = JSON.parse(localStorage.getItem("faculty")) || [];
+
+    let allUsers = [];
+
+    // Add HOD
+    hods.forEach(h=>{
+        allUsers.push({name:h.name, email:h.email, role:"HOD"});
+    });
+
+    // Add Faculty
+    faculty.forEach(f=>{
+        allUsers.push({name:f.name, email:f.email, role:f.position});
+    });
+
+    displayUsers(allUsers);
+}
+
+// Display Table
+function displayUsers(data){
+    let output = `
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
+    `;
+
+    data.forEach(u=>{
+        output += `
+        <tr>
+            <td>${u.name}</td>
+            <td>${u.email}</td>
+            <td>${u.role}</td>
+        </tr>`;
+    });
+
+    output += "</table>";
+
+    document.getElementById("userTable").innerHTML = output;
+}
+
+// Search Filter
+function filterUsers(){
+    let search = document.getElementById("search").value.toLowerCase();
+
+    let hods = JSON.parse(localStorage.getItem("hods")) || [];
+    let faculty = JSON.parse(localStorage.getItem("faculty")) || [];
+
+    let allUsers = [];
+
+    hods.forEach(h=>{
+        allUsers.push({name:h.name, email:h.email, role:"HOD"});
+    });
+
+    faculty.forEach(f=>{
+        allUsers.push({name:f.name, email:f.email, role:f.position});
+    });
+
+    let filtered = allUsers.filter(u =>
+        u.name.toLowerCase().includes(search)
+    );
+
+    displayUsers(filtered);
+}
+
+// Load on start
+window.onload = loadUsers;
+</script>
+
+</body>
+</html>

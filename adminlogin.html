@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login Page</title>
+<style>
+body {
+    font-family: Arial;
+    background-color: transparent;
+    background-image:url(vemulogo.jpeg) ;
+    background-position: center;
+    margin-top: 300px;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    size-adjust: inherit;
+    size-adjust: initial;
+    position: relative;
+    transform: scale(1.0);
+    transform-origin:center ;
+    
+}
+.login-box {
+    width: 300px;
+    padding: 20px;
+    background: transparent;
+    margin: 100px auto;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 10px gray;
+    border: 2px solid black;
+    margin-bottom: 300px;
+    align-items: center;
+}
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+}
+button {
+    width: 95%;
+    padding: 10px;
+    background: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+.error {
+    color: black;
+    font-size: small;
+    text-align: center;
+}
+img{
+    border-radius: 50px;
+    height: 70px;
+}
+</style>
+</head>
+<body>
+  
+<div class="login-box">
+    <h2> <img src="logo.jpeg" > </h2>
+    <h2>ADMIN LOGIN</h2>
+    <form id="loginForm">
+        <input type="text" placeholder="Username" id="user" required><br>
+        <input type="password" placeholder="Password" id="pass" required><br>
+        <a href="adminpage.html"><button type="submit"> LOG IN</button></a><br><br>
+        <a href="homepage.html"> GO TO HOME  </a>
+        <p class="error" id="errorMsg"></p>
+    </form>
+</div>
+
+
+<script>
+    const form = document.getElementById('loginForm');
+    const errorMsg = document.getElementById('errorMsg');
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const user = document.getElementById('user').value;
+        const pass = document.getElementById('pass').value;
+
+        if (user === "admin" && pass === "1") {
+            window.location.href = "adminpage.html";
+        } else {
+            errorMsg.textContent = "Invalid Username or password";
+        }
+    });
+</script>
+
+</body>
+</html>
