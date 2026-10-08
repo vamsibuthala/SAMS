@@ -201,11 +201,13 @@ const Dashboard = () => {
               </svg>
             </button>
             <div className="flex items-center space-x-2.5">
-              <img
-                src="/vemulogo.jpeg"
-                alt="VEMU Logo"
-                className="h-9 w-9 object-contain rounded-full bg-white p-0.5 shadow-sm border border-slate-700"
-              />
+              <div className="h-10 w-10 rounded-full bg-white p-0.5 shadow-sm border border-slate-700 flex items-center justify-center">
+                <img
+                  src="/logo.jpeg"
+                  alt="VEMU Logo"
+                  className="h-full w-full object-contain"
+                />
+              </div>
               <span className="font-extrabold text-xl tracking-tight text-blue-400">VEMU</span>
               <span className="text-sm font-semibold tracking-wider text-slate-300 hidden sm:inline">
                 | ATTENDANCE MANAGEMENT SYSTEM

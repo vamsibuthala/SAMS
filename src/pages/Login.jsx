@@ -56,11 +56,11 @@ const Login = () => {
       <div className="relative z-10 bg-slate-900/90 backdrop-blur-xl rounded-3xl shadow-2xl w-full max-w-md overflow-hidden border border-slate-700/70 text-slate-100">
         {/* College Branding Header with Logo */}
         <div className="pt-8 pb-6 px-8 text-center border-b border-slate-800">
-          <div className="inline-block p-1.5 bg-white rounded-2xl shadow-lg mb-3">
+          <div className="inline-block p-2 bg-white rounded-2xl shadow-xl ring-2 ring-blue-500/40 mb-3.5">
             <img
-              src="/vemulogo.jpeg"
+              src="/logo.jpeg"
               alt="VEMU College Logo"
-              className="w-16 h-16 object-contain rounded-xl"
+              className="w-20 h-20 object-contain rounded-xl"
             />
           </div>
           <h1 className="text-xl font-black tracking-tight text-white">
@@ -118,7 +118,7 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-2.5 bg-slate-950/60 border border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm text-white placeholder-slate-500 transition"
-                placeholder={`${role}@vemu.edu`}
+                placeholder="Enter your email"
               />
             </div>
 

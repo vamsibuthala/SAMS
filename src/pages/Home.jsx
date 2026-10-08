@@ -53,12 +53,14 @@ const Home = () => {
       {/* Main Navbar */}
       <nav className="bg-slate-900/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-800 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-3 group">
-            <img
-              src="/vemulogo.jpeg"
-              alt="VEMU Logo"
-              className="h-12 w-12 object-contain rounded-full bg-white p-0.5 shadow-md border border-slate-700"
-            />
+          <Link to="/" className="flex items-center space-x-3.5 group">
+            <div className="h-14 w-14 rounded-full bg-white p-1 shadow-lg ring-2 ring-blue-500/40 flex items-center justify-center">
+              <img
+                src="/logo.jpeg"
+                alt="VEMU Logo"
+                className="h-full w-full object-contain"
+              />
+            </div>
             <div>
               <div className="flex items-center space-x-2">
                 <span className="font-black text-xl tracking-tight text-white group-hover:text-blue-400 transition">
@@ -230,11 +232,13 @@ const Home = () => {
       {/* Call to Action Banner */}
       <section className="py-16 bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 border-t border-b border-blue-800">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <img
-            src="/vemulogo.jpeg"
-            alt="VEMU"
-            className="w-16 h-16 rounded-full mx-auto mb-4 bg-white p-1 border-2 border-white/20 shadow-lg object-contain"
-          />
+          <div className="w-20 h-20 rounded-full mx-auto mb-4 bg-white p-1.5 ring-4 ring-white/30 shadow-2xl flex items-center justify-center">
+            <img
+              src="/logo.jpeg"
+              alt="VEMU"
+              className="w-full h-full object-contain"
+            />
+          </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-white">
             Ready to record or view attendance?
           </h2>
@@ -256,7 +260,7 @@ const Home = () => {
       <footer className="bg-slate-950 py-10 border-t border-slate-900 text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-3">
-            <img src="/vemulogo.jpeg" alt="Logo" className="w-7 h-7 rounded-full bg-white p-0.5 object-contain" />
+            <img src="/logo.jpeg" alt="Logo" className="w-8 h-8 rounded-full bg-white p-0.5 object-contain" />
             <p className="text-slate-400 font-semibold">
               VEMU Institute of Technology • Student Attendance Management System (SAMS)
             </p>
