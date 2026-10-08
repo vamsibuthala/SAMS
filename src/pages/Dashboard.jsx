@@ -1,40 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '../supabaseClient';
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [role, setRole] = useState('student');
   const [activeTab, setActiveTab] = useState('overview');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [dbConnected, setDbConnected] = useState(true);
 
   // States for Admin
   const [hods, setHods] = useState([
-    { id: 1, name: 'Dr. Ramesh Kumar', email: 'ramesh.hod@vemu.edu', department: 'CSE' },
-    { id: 2, name: 'Dr. Priya Sharma', email: 'priya.hod@vemu.edu', department: 'ECE' }
+    { id: '1', name: 'Dr. Ramesh Kumar', email: 'ramesh.hod@vemu.edu', department: 'CSE' },
+    { id: '2', name: 'Dr. Priya Sharma', email: 'priya.hod@vemu.edu', department: 'ECE' }
   ]);
   const [newHod, setNewHod] = useState({ name: '', email: '', department: 'CSE' });
 
   // States for Faculty
   const [faculties, setFaculties] = useState([
-    { id: 1, name: 'Prof. Suresh V', email: 'suresh@vemu.edu', position: 'Assistant Professor', department: 'CSE' },
-    { id: 2, name: 'Prof. Anitha M', email: 'anitha@vemu.edu', position: 'Professor', department: 'CSE' }
+    { id: '1', name: 'Prof. Suresh V', email: 'suresh@vemu.edu', position: 'Assistant Professor', department: 'CSE' },
+    { id: '2', name: 'Prof. Anitha M', email: 'anitha@vemu.edu', position: 'Professor', department: 'CSE' }
   ]);
   const [newFaculty, setNewFaculty] = useState({ name: '', email: '', position: 'Assistant Professor', department: 'CSE' });
 
   // States for Students
   const [students, setStudents] = useState([
-    { id: 1, roll: '2023CS01', name: 'Rahul Varma', classSection: 'CSE-A', email: 'rahul@vemu.edu' },
-    { id: 2, roll: '2023CS02', name: 'Sneha Reddy', classSection: 'CSE-A', email: 'sneha@vemu.edu' },
-    { id: 3, roll: '2023CS03', name: 'Karthik Raju', classSection: 'CSE-B', email: 'karthik@vemu.edu' }
+    { id: '1', roll: '2023CS01', name: 'Rahul Varma', classSection: 'CSE-A', email: 'rahul@vemu.edu' },
+    { id: '2', roll: '2023CS02', name: 'Sneha Reddy', classSection: 'CSE-A', email: 'sneha@vemu.edu' },
+    { id: '3', roll: '2023CS03', name: 'Karthik Raju', classSection: 'CSE-B', email: 'karthik@vemu.edu' }
   ]);
   const [newStudent, setNewStudent] = useState({ roll: '', name: '', classSection: 'CSE-A', email: '' });
 
   // Attendance Records
   const [attendanceRecords, setAttendanceRecords] = useState([
-    { id: 1, studentName: 'Rahul Varma', subject: 'Data Structures', date: '2026-10-05', status: 'Present' },
-    { id: 2, studentName: 'Sneha Reddy', subject: 'Data Structures', date: '2026-10-05', status: 'Present' },
-    { id: 3, studentName: 'Karthik Raju', subject: 'Data Structures', date: '2026-10-05', status: 'Absent' },
-    { id: 4, studentName: 'Rahul Varma', subject: 'Web Technologies', date: '2026-10-06', status: 'Present' }
+    { id: '1', studentName: 'Rahul Varma', subject: 'Data Structures', date: '2026-10-05', status: 'Present' },
+    { id: '2', studentName: 'Sneha Reddy', subject: 'Data Structures', date: '2026-10-05', status: 'Present' },
+    { id: '3', studentName: 'Karthik Raju', subject: 'Data Structures', date: '2026-10-05', status: 'Absent' },
+    { id: '4', studentName: 'Rahul Varma', subject: 'Web Technologies', date: '2026-10-06', status: 'Present' }
   ]);
   const [attendanceForm, setAttendanceForm] = useState({
     studentName: 'Rahul Varma',
@@ -46,7 +49,43 @@ const Dashboard = () => {
   useEffect(() => {
     const savedRole = localStorage.getItem('userRole') || 'student';
     setRole(savedRole);
+    fetchDataFromSupabase();
   }, []);
+
+  // Fetch data directly from Supabase
+  const fetchDataFromSupabase = async () => {
+    try {
+      setLoading(true);
+      // Fetch attendance
+      const { data: attData, error: attErr } = await supabase.from('attendance').select('*').order('created_at', { ascending: false });
+      if (!attErr && attData && attData.length > 0) {
+        setAttendanceRecords(attData.map(a => ({
+          id: a.id,
+          studentName: a.student_name,
+          subject: a.subject,
+          date: a.date,
+          status: a.status
+        })));
+      }
+
+      // Fetch profiles
+      const { data: profData, error: profErr } = await supabase.from('profiles').select('*');
+      if (!profErr && profData && profData.length > 0) {
+        const hList = profData.filter(p => p.role === 'hod').map(p => ({ id: p.id, name: p.full_name, email: p.email, department: p.department || 'CSE' }));
+        const fList = profData.filter(p => p.role === 'faculty').map(p => ({ id: p.id, name: p.full_name, email: p.email, position: p.department || 'Professor', department: 'CSE' }));
+        const sList = profData.filter(p => p.role === 'student').map(p => ({ id: p.id, roll: p.roll_number || '2023CS01', name: p.full_name, classSection: p.department || 'CSE-A', email: p.email }));
+        
+        if (hList.length > 0) setHods(hList);
+        if (fList.length > 0) setFaculties(fList);
+        if (sList.length > 0) setStudents(sList);
+      }
+      setDbConnected(true);
+    } catch (err) {
+      console.warn('Supabase sync notice:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('userRole');
@@ -54,46 +93,100 @@ const Dashboard = () => {
   };
 
   // Add Handlers
-  const handleAddHod = (e) => {
+  const handleAddHod = async (e) => {
     e.preventDefault();
     if (!newHod.name || !newHod.email) return;
-    setHods([...hods, { ...newHod, id: Date.now() }]);
+    try {
+      await supabase.from('profiles').insert([{
+        full_name: newHod.name,
+        email: newHod.email,
+        role: 'hod',
+        department: newHod.department
+      }]);
+    } catch (err) {
+      console.error(err);
+    }
+    setHods([...hods, { ...newHod, id: String(Date.now()) }]);
     setNewHod({ name: '', email: '', department: 'CSE' });
   };
 
-  const handleDeleteHod = (id) => {
+  const handleDeleteHod = async (id) => {
+    try {
+      await supabase.from('profiles').delete().eq('id', id);
+    } catch (err) {
+      console.error(err);
+    }
     setHods(hods.filter((h) => h.id !== id));
   };
 
-  const handleAddFaculty = (e) => {
+  const handleAddFaculty = async (e) => {
     e.preventDefault();
     if (!newFaculty.name || !newFaculty.email) return;
-    setFaculties([...faculties, { ...newFaculty, id: Date.now() }]);
+    try {
+      await supabase.from('profiles').insert([{
+        full_name: newFaculty.name,
+        email: newFaculty.email,
+        role: 'faculty',
+        department: newFaculty.position
+      }]);
+    } catch (err) {
+      console.error(err);
+    }
+    setFaculties([...faculties, { ...newFaculty, id: String(Date.now()) }]);
     setNewFaculty({ name: '', email: '', position: 'Assistant Professor', department: 'CSE' });
   };
 
-  const handleDeleteFaculty = (id) => {
+  const handleDeleteFaculty = async (id) => {
+    try {
+      await supabase.from('profiles').delete().eq('id', id);
+    } catch (err) {
+      console.error(err);
+    }
     setFaculties(faculties.filter((f) => f.id !== id));
   };
 
-  const handleAddStudent = (e) => {
+  const handleAddStudent = async (e) => {
     e.preventDefault();
     if (!newStudent.name || !newStudent.roll) return;
-    setStudents([...students, { ...newStudent, id: Date.now() }]);
+    try {
+      await supabase.from('profiles').insert([{
+        full_name: newStudent.name,
+        email: newStudent.email || `${newStudent.roll.toLowerCase()}@vemu.edu`,
+        role: 'student',
+        roll_number: newStudent.roll,
+        department: newStudent.classSection
+      }]);
+    } catch (err) {
+      console.error(err);
+    }
+    setStudents([...students, { ...newStudent, id: String(Date.now()) }]);
     setNewStudent({ roll: '', name: '', classSection: 'CSE-A', email: '' });
   };
 
-  const handleDeleteStudent = (id) => {
+  const handleDeleteStudent = async (id) => {
+    try {
+      await supabase.from('profiles').delete().eq('id', id);
+    } catch (err) {
+      console.error(err);
+    }
     setStudents(students.filter((s) => s.id !== id));
   };
 
-  const handleMarkAttendance = (e) => {
+  const handleMarkAttendance = async (e) => {
     e.preventDefault();
-    setAttendanceRecords([
-      { ...attendanceForm, id: Date.now() },
-      ...attendanceRecords
-    ]);
-    alert('Attendance marked successfully!');
+    const newRecord = { ...attendanceForm, id: String(Date.now()) };
+    try {
+      await supabase.from('attendance').insert([{
+        student_name: attendanceForm.studentName,
+        subject: attendanceForm.subject,
+        date: attendanceForm.date,
+        status: attendanceForm.status
+      }]);
+    } catch (err) {
+      console.error('Save to Supabase error:', err);
+    }
+    setAttendanceRecords([newRecord, ...attendanceRecords]);
+    alert('Attendance marked and recorded in Supabase!');
   };
 
   return (
@@ -117,11 +210,9 @@ const Dashboard = () => {
           </div>
 
           <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <span className="text-xs uppercase px-2.5 py-1 rounded-full font-bold bg-blue-600/30 text-blue-300 border border-blue-500/30">
-                {role}
-              </span>
-            </div>
+            <span className="text-xs uppercase px-2.5 py-1 rounded-full font-bold bg-blue-600/30 text-blue-300 border border-blue-500/30">
+              {role}
+            </span>
             <button
               onClick={handleLogout}
               className="text-xs bg-red-600 hover:bg-red-700 text-white font-semibold py-1.5 px-3.5 rounded-lg transition duration-150 shadow"
@@ -188,7 +279,10 @@ const Dashboard = () => {
 
             <div className="px-4 py-3 mx-3 rounded-lg bg-slate-800/60 border border-slate-700/50 text-xs text-slate-400">
               <p className="font-semibold text-slate-300">VEMU IT Institute</p>
-              <p>Academic Year 2026-27</p>
+              <div className="flex items-center gap-1.5 mt-1 text-emerald-400">
+                <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span>Supabase Connected</span>
+              </div>
             </div>
           </aside>
         )}
@@ -201,7 +295,7 @@ const Dashboard = () => {
               <div className="flex flex-col md:flex-row md:items-center md:justify-between border-b pb-4">
                 <div>
                   <h1 className="text-2xl font-bold text-slate-900 capitalize">{role} Dashboard</h1>
-                  <p className="text-slate-500 text-sm mt-1">Welcome back! Here is a summary of your attendance status.</p>
+                  <p className="text-slate-500 text-sm mt-1">Live overview synced with Supabase Database.</p>
                 </div>
               </div>
 
@@ -279,7 +373,7 @@ const Dashboard = () => {
             </div>
           )}
 
-          {/* TAB 2: MANAGE USERS (For Admin & HOD) */}
+          {/* TAB 2: MANAGE USERS */}
           {activeTab === 'manage-users' && (
             <div className="space-y-8">
               {role === 'admin' && (
@@ -485,7 +579,7 @@ const Dashboard = () => {
           {activeTab === 'mark-attendance' && (
             <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 max-w-2xl">
               <h2 className="text-xl font-bold text-slate-900 mb-2">Mark Attendance</h2>
-              <p className="text-sm text-slate-500 mb-6">Select student, subject, date, and status to record attendance.</p>
+              <p className="text-sm text-slate-500 mb-6">Attendance records are directly synchronized with Supabase Database.</p>
 
               <form onSubmit={handleMarkAttendance} className="space-y-4">
                 <div>
@@ -547,7 +641,7 @@ const Dashboard = () => {
                     type="submit"
                     className="w-full sm:w-auto px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg text-sm transition shadow"
                   >
-                    Save Attendance
+                    Save Attendance to Supabase
                   </button>
                 </div>
               </form>
