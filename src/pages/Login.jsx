@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { authenticateUser, DEFAULT_ADMIN } from '../authStore';
+import { useNavigate, Link } from 'react-router-dom';
+import { authenticateUser } from '../authStore';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -9,14 +9,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  // Quick fill Admin credentials
-  const fillAdminCredentials = () => {
-    setRole('admin');
-    setEmail(DEFAULT_ADMIN.email);
-    setPassword(DEFAULT_ADMIN.password);
-    setError(null);
-  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -30,7 +22,7 @@ const Login = () => {
         localStorage.setItem('currentUser', JSON.stringify(result.user));
         navigate('/dashboard');
       } else {
-        setError(result.error || 'Authentication failed. Please check your credentials.');
+        setError(result.error || 'Authentication failed. Please verify your email and password.');
       }
     } catch (err) {
       setError(err.message || 'An unexpected error occurred during login.');
@@ -40,59 +32,61 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 p-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden border border-slate-100">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-blue-700 to-indigo-800 p-6 text-white text-center">
-          <div className="inline-flex p-3 bg-white/10 rounded-2xl mb-3 backdrop-blur-sm">
-            <span className="text-3xl">🎓</span>
+    <div className="relative min-h-screen flex items-center justify-center p-4 font-sans overflow-hidden">
+      {/* College Campus Background with Dark Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/campas1.jpg"
+          alt="VEMU Campus"
+          className="w-full h-full object-cover object-center filter brightness-40 blur-[2px] scale-105"
+        />
+        <div className="absolute inset-0 bg-slate-950/75 backdrop-blur-[3px]"></div>
+      </div>
+
+      {/* Floating Back to Home button */}
+      <Link
+        to="/"
+        className="absolute top-6 left-6 z-20 flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/60 backdrop-blur-md text-xs font-semibold transition"
+      >
+        <span>←</span>
+        <span>Back to College Home</span>
+      </Link>
+
+      {/* Login Card */}
+      <div className="relative z-10 bg-slate-900/90 backdrop-blur-xl rounded-3xl shadow-2xl w-full max-w-md overflow-hidden border border-slate-700/70 text-slate-100">
+        {/* College Branding Header with Logo */}
+        <div className="pt-8 pb-6 px-8 text-center border-b border-slate-800">
+          <div className="inline-block p-1.5 bg-white rounded-2xl shadow-lg mb-3">
+            <img
+              src="/vemulogo.jpeg"
+              alt="VEMU College Logo"
+              className="w-16 h-16 object-contain rounded-xl"
+            />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight">VEMU SAMS</h1>
-          <p className="text-blue-200 text-xs mt-1 uppercase tracking-wider font-semibold">
-            Student Attendance Management System
+          <h1 className="text-xl font-black tracking-tight text-white">
+            VEMU INSTITUTE OF TECHNOLOGY
+          </h1>
+          <p className="text-xs font-semibold text-blue-400 mt-1 uppercase tracking-wider">
+            Student Attendance Management System (SAMS)
           </p>
         </div>
 
-        {/* Fresh Admin Credentials Alert */}
-        <div className="mx-6 mt-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
-          <div className="flex items-start justify-between">
-            <div>
-              <p className="text-xs font-bold text-blue-900 uppercase tracking-wide">
-                🔑 Default Admin Credentials
-              </p>
-              <p className="text-xs text-blue-800 mt-1 font-mono">
-                Email: <span className="font-semibold text-blue-950">admin@vemu.edu</span>
-              </p>
-              <p className="text-xs text-blue-800 font-mono">
-                Password: <span className="font-semibold text-blue-950">admin@123</span>
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={fillAdminCredentials}
-              className="text-xs bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1.5 px-3 rounded-lg shadow-sm transition"
-            >
-              Auto Fill
-            </button>
-          </div>
-        </div>
-
-        {/* Login Form */}
-        <div className="p-6 pt-4">
+        {/* Form Container */}
+        <div className="p-8 pt-6">
           {error && (
-            <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-3 rounded-md mb-4 text-xs font-medium flex items-center">
+            <div className="bg-red-950/80 border border-red-500/50 text-red-200 p-3 rounded-xl mb-5 text-xs font-medium flex items-center">
               <span className="mr-2 text-base">⚠️</span>
               {error}
             </div>
           )}
 
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={handleLogin} className="space-y-5">
             {/* Role Selection */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">
+              <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">
                 Select Your Role
               </label>
-              <div className="grid grid-cols-4 gap-1.5 p-1 bg-slate-100 rounded-xl">
+              <div className="grid grid-cols-4 gap-1 p-1 bg-slate-950/80 rounded-xl border border-slate-800">
                 {['admin', 'hod', 'faculty', 'student'].map((r) => (
                   <button
                     type="button"
@@ -103,8 +97,8 @@ const Login = () => {
                     }}
                     className={`py-2 text-xs rounded-lg capitalize font-bold transition-all ${
                       role === r
-                        ? 'bg-blue-600 text-white shadow'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200'
+                        ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30'
+                        : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
                     }`}
                   >
                     {r}
@@ -113,24 +107,24 @@ const Login = () => {
               </div>
             </div>
 
-            {/* Email Input */}
+            {/* Email Address */}
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">
-                Email Address
+              <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                Institutional Email
               </label>
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm transition"
+                className="w-full px-4 py-2.5 bg-slate-950/60 border border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm text-white placeholder-slate-500 transition"
                 placeholder={`${role}@vemu.edu`}
               />
             </div>
 
-            {/* Password Input */}
+            {/* Password */}
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">
+              <label className="block text-xs font-semibold text-slate-300 mb-1.5">
                 Password
               </label>
               <input
@@ -138,28 +132,25 @@ const Login = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm transition"
-                placeholder="Enter password"
+                className="w-full px-4 py-2.5 bg-slate-950/60 border border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm text-white placeholder-slate-500 transition"
+                placeholder="Enter your password"
               />
             </div>
 
-            {/* Login Button */}
+            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition duration-150 shadow-md text-sm mt-2 flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3 rounded-xl transition duration-150 shadow-lg shadow-blue-600/30 text-sm mt-3 disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
             >
-              {loading ? 'Authenticating...' : `Login as ${role.toUpperCase()}`}
+              {loading ? 'Authenticating...' : `Sign In as ${role.toUpperCase()}`}
             </button>
           </form>
 
-          {/* Role Hierarchy Note */}
-          <div className="mt-6 pt-4 border-t border-slate-100 text-center">
+          {/* Footer note */}
+          <div className="mt-6 pt-4 border-t border-slate-800 text-center">
             <p className="text-[11px] text-slate-400">
-              Role Hierarchy: <span className="font-semibold text-slate-600">Admin</span> ➔{' '}
-              <span className="font-semibold text-slate-600">HOD</span> ➔{' '}
-              <span className="font-semibold text-slate-600">Faculty</span> ➔{' '}
-              <span className="font-semibold text-slate-600">Student</span>
+              Affiliated to JNTUA • Approved by AICTE • NAAC Accredited
             </p>
           </div>
         </div>

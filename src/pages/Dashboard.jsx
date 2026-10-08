@@ -200,7 +200,12 @@ const Dashboard = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2.5">
+              <img
+                src="/vemulogo.jpeg"
+                alt="VEMU Logo"
+                className="h-9 w-9 object-contain rounded-full bg-white p-0.5 shadow-sm border border-slate-700"
+              />
               <span className="font-extrabold text-xl tracking-tight text-blue-400">VEMU</span>
               <span className="text-sm font-semibold tracking-wider text-slate-300 hidden sm:inline">
                 | ATTENDANCE MANAGEMENT SYSTEM
