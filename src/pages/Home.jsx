@@ -263,50 +263,98 @@ const Home = () => {
           {/* 4 Team Members Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
             {/* Team Lead: VAMSI BUTHALA */}
-            <div className="p-6 rounded-2xl bg-gradient-to-b from-blue-900/40 to-slate-900 border-2 border-blue-500/60 shadow-xl text-center relative overflow-hidden group hover:-translate-y-1 transition duration-200">
-              <div className="absolute top-3 right-3 bg-blue-500 text-white text-[10px] uppercase tracking-wider font-extrabold px-2 py-0.5 rounded-full shadow">
-                Lead
+            <div className="p-6 rounded-2xl bg-gradient-to-b from-blue-900/40 to-slate-900 border-2 border-blue-500/60 shadow-xl text-center relative overflow-hidden group hover:-translate-y-1 transition duration-200 flex flex-col justify-between">
+              <div>
+                <div className="absolute top-3 right-3 bg-blue-500 text-white text-[10px] uppercase tracking-wider font-extrabold px-2 py-0.5 rounded-full shadow">
+                  Lead
+                </div>
+                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-500 p-0.5 mx-auto mb-3 shadow-lg flex items-center justify-center text-3xl">
+                  👨‍💻
+                </div>
+                <h3 className="text-lg font-black text-white tracking-wide">VAMSI BUTHALA</h3>
+                <p className="text-xs text-blue-300 font-semibold mt-1">Team Lead & Developer</p>
+                <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Computer Science & Engineering</p>
+                <p className="text-[11px] text-slate-400 mt-2">Project Architecture, React & Cloud Sync</p>
               </div>
-              <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-500 p-0.5 mx-auto mb-3 shadow-lg flex items-center justify-center text-3xl">
-                👨‍💻
+              <div className="mt-4 pt-3 border-t border-slate-800">
+                <a
+                  href="mailto:vamsibuthala@gmail.com"
+                  className="inline-flex items-center justify-center gap-1.5 w-full py-1.5 px-2.5 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 text-blue-300 text-xs font-mono transition border border-blue-500/30 hover:border-blue-400"
+                  title="Contact Vamsi Buthala"
+                >
+                  <span>✉️</span>
+                  <span className="truncate">vamsibuthala@gmail.com</span>
+                </a>
               </div>
-              <h3 className="text-lg font-black text-white tracking-wide">VAMSI BUTHALA</h3>
-              <p className="text-xs text-blue-300 font-semibold mt-1">Team Lead & Developer</p>
-              <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Computer Science & Engineering</p>
-              <p className="text-[11px] text-slate-400 mt-2">Project Architecture, React & Cloud Sync</p>
             </div>
 
             {/* C . BHARATH */}
-            <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/60 shadow-lg text-center hover:border-slate-500 transition duration-200 hover:-translate-y-1">
-              <div className="w-16 h-16 rounded-full bg-slate-700 p-0.5 mx-auto mb-3 shadow-md flex items-center justify-center text-3xl">
-                👨‍🎓
+            <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/60 shadow-lg text-center hover:border-slate-500 transition duration-200 hover:-translate-y-1 flex flex-col justify-between">
+              <div>
+                <div className="w-16 h-16 rounded-full bg-slate-700 p-0.5 mx-auto mb-3 shadow-md flex items-center justify-center text-3xl">
+                  👨‍🎓
+                </div>
+                <h3 className="text-lg font-black text-white tracking-wide">C . BHARATH</h3>
+                <p className="text-xs text-slate-300 font-semibold mt-1">Team Member</p>
+                <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Computer Science & Engineering</p>
+                <p className="text-[11px] text-slate-400 mt-2">System Development & Module Testing</p>
               </div>
-              <h3 className="text-lg font-black text-white tracking-wide">C . BHARATH</h3>
-              <p className="text-xs text-slate-300 font-semibold mt-1">Team Member</p>
-              <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Computer Science & Engineering</p>
-              <p className="text-[11px] text-slate-400 mt-2">System Development & Module Testing</p>
+              <div className="mt-4 pt-3 border-t border-slate-800/80">
+                <a
+                  href="mailto:bharathchalapathi@gmail.com"
+                  className="inline-flex items-center justify-center gap-1.5 w-full py-1.5 px-2.5 rounded-lg bg-slate-900/80 hover:bg-slate-700/80 text-slate-300 hover:text-white text-xs font-mono transition border border-slate-700/60"
+                  title="Contact C . Bharath"
+                >
+                  <span>✉️</span>
+                  <span className="truncate">bharathchalapathi@gmail.com</span>
+                </a>
+              </div>
             </div>
 
             {/* C. GANESH KUMAR RAJU */}
-            <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/60 shadow-lg text-center hover:border-slate-500 transition duration-200 hover:-translate-y-1">
-              <div className="w-16 h-16 rounded-full bg-slate-700 p-0.5 mx-auto mb-3 shadow-md flex items-center justify-center text-3xl">
-                👨‍🎓
+            <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/60 shadow-lg text-center hover:border-slate-500 transition duration-200 hover:-translate-y-1 flex flex-col justify-between">
+              <div>
+                <div className="w-16 h-16 rounded-full bg-slate-700 p-0.5 mx-auto mb-3 shadow-md flex items-center justify-center text-3xl">
+                  👨‍🎓
+                </div>
+                <h3 className="text-lg font-black text-white tracking-wide">C. GANESH KUMAR RAJU</h3>
+                <p className="text-xs text-slate-300 font-semibold mt-1">Team Member</p>
+                <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Computer Science & Engineering</p>
+                <p className="text-[11px] text-slate-400 mt-2">Frontend Integration & Workflow Design</p>
               </div>
-              <h3 className="text-lg font-black text-white tracking-wide">C. GANESH KUMAR RAJU</h3>
-              <p className="text-xs text-slate-300 font-semibold mt-1">Team Member</p>
-              <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Computer Science & Engineering</p>
-              <p className="text-[11px] text-slate-400 mt-2">Frontend Integration & Workflow Design</p>
+              <div className="mt-4 pt-3 border-t border-slate-800/80">
+                <a
+                  href="mailto:chamarthiganesh444@gmail.com"
+                  className="inline-flex items-center justify-center gap-1.5 w-full py-1.5 px-2.5 rounded-lg bg-slate-900/80 hover:bg-slate-700/80 text-slate-300 hover:text-white text-xs font-mono transition border border-slate-700/60"
+                  title="Contact C. Ganesh Kumar Raju"
+                >
+                  <span>✉️</span>
+                  <span className="truncate">chamarthiganesh444@gmail.com</span>
+                </a>
+              </div>
             </div>
 
             {/* C. BALAJI */}
-            <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/60 shadow-lg text-center hover:border-slate-500 transition duration-200 hover:-translate-y-1">
-              <div className="w-16 h-16 rounded-full bg-slate-700 p-0.5 mx-auto mb-3 shadow-md flex items-center justify-center text-3xl">
-                👨‍🎓
+            <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/60 shadow-lg text-center hover:border-slate-500 transition duration-200 hover:-translate-y-1 flex flex-col justify-between">
+              <div>
+                <div className="w-16 h-16 rounded-full bg-slate-700 p-0.5 mx-auto mb-3 shadow-md flex items-center justify-center text-3xl">
+                  👨‍🎓
+                </div>
+                <h3 className="text-lg font-black text-white tracking-wide">C. BALAJI</h3>
+                <p className="text-xs text-slate-300 font-semibold mt-1">Team Member</p>
+                <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Computer Science & Engineering</p>
+                <p className="text-[11px] text-slate-400 mt-2">Database Modeling & Quality Assurance</p>
               </div>
-              <h3 className="text-lg font-black text-white tracking-wide">C. BALAJI</h3>
-              <p className="text-xs text-slate-300 font-semibold mt-1">Team Member</p>
-              <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Computer Science & Engineering</p>
-              <p className="text-[11px] text-slate-400 mt-2">Database Modeling & Quality Assurance</p>
+              <div className="mt-4 pt-3 border-t border-slate-800/80">
+                <a
+                  href="mailto:balajichennupati0@gmail.com"
+                  className="inline-flex items-center justify-center gap-1.5 w-full py-1.5 px-2.5 rounded-lg bg-slate-900/80 hover:bg-slate-700/80 text-slate-300 hover:text-white text-xs font-mono transition border border-slate-700/60"
+                  title="Contact C. Balaji"
+                >
+                  <span>✉️</span>
+                  <span className="truncate">balajichennupati0@gmail.com</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
