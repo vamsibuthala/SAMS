@@ -152,6 +152,9 @@ const Login = () => {
             <p className="text-[11px] text-slate-400">
               Affiliated to JNTUA • Approved by AICTE • NAAC Accredited
             </p>
+            <p className="text-[10px] text-slate-500 mt-2">
+              Developed by <strong className="text-blue-400 font-semibold">VAMSI BUTHALA</strong>, C . BHARATH, C. GANESH KUMAR RAJU, C. BALAJI
+            </p>
           </div>
         </div>
       </div>

@@ -238,50 +238,54 @@ const Home = () => {
             </div>
             <h2 className="text-3xl font-bold text-white">Project Development Team</h2>
             <p className="text-sm text-slate-400 mt-2">
-              Designed and built by students of VEMU Institute of Technology for the academic community.
+              Designed and developed by students of VEMU Institute of Technology for the academic community.
             </p>
           </div>
 
-          {/* Team Lead Card */}
-          <div className="max-w-md mx-auto mb-10">
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-900/60 to-indigo-900/40 border-2 border-blue-500/50 shadow-xl text-center relative overflow-hidden group">
-              <div className="absolute top-3 right-3 bg-blue-500 text-white text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-0.5 rounded-full">
-                Team Lead
+          {/* 4 Team Members Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {/* Team Lead: VAMSI BUTHALA */}
+            <div className="p-6 rounded-2xl bg-gradient-to-b from-blue-900/40 to-slate-900 border-2 border-blue-500/60 shadow-xl text-center relative overflow-hidden group hover:-translate-y-1 transition duration-200">
+              <div className="absolute top-3 right-3 bg-blue-500 text-white text-[10px] uppercase tracking-wider font-extrabold px-2 py-0.5 rounded-full shadow">
+                Lead
               </div>
-              <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-400 p-1 mx-auto mb-3 shadow-lg flex items-center justify-center">
-                <span className="text-3xl">👨‍💻</span>
+              <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-500 p-0.5 mx-auto mb-3 shadow-lg flex items-center justify-center text-3xl">
+                👨‍💻
               </div>
-              <h3 className="text-xl font-black text-white">VAMSI BUTHALA</h3>
-              <p className="text-xs text-blue-300 font-semibold mt-0.5">Project Lead & Full-Stack Developer</p>
-              <p className="text-[11px] text-slate-400 mt-2">
-                Architecture, React Frontend, Supabase Integration & Vercel Deployment
-              </p>
+              <h3 className="text-lg font-black text-white tracking-wide">VAMSI BUTHALA</h3>
+              <p className="text-xs text-blue-300 font-semibold mt-1">Team Lead & Full-Stack Developer</p>
+              <p className="text-[11px] text-slate-400 mt-2">Project Architecture, React & Supabase</p>
             </div>
-          </div>
 
-          {/* Teammates Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-            {[
-              { name: 'ROUF', role: 'Database & Supabase API', icon: '🗄️' },
-              { name: 'GANI', role: 'Frontend & UI Design', icon: '🎨' },
-              { name: 'GOPI', role: 'Role Hierarchy Logic', icon: '🔐' },
-              { name: 'GOWTHAM', role: 'Testing & Validation', icon: '🧪' },
-              { name: 'BHARATH', role: 'System Documentation', icon: '📑' },
-              { name: 'SASHANTH', role: 'Security & Access Control', icon: '🛡️' },
-              { name: 'ASIF', role: 'Attendance Workflow', icon: '✍️' },
-              { name: 'PAVAN KUMAR', role: 'Reports & Export Module', icon: '📊' }
-            ].map((member, idx) => (
-              <div
-                key={idx}
-                className="p-4 rounded-xl bg-slate-800/60 border border-slate-700/60 text-center hover:border-slate-600 transition hover:-translate-y-0.5"
-              >
-                <div className="w-11 h-11 rounded-full bg-slate-700/60 flex items-center justify-center mx-auto mb-2 text-xl">
-                  {member.icon}
-                </div>
-                <h4 className="font-bold text-sm text-white tracking-wide">{member.name}</h4>
-                <p className="text-[11px] text-slate-400 mt-0.5 leading-snug">{member.role}</p>
+            {/* C . BHARATH */}
+            <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/60 shadow-lg text-center hover:border-slate-500 transition duration-200 hover:-translate-y-1">
+              <div className="w-16 h-16 rounded-full bg-slate-700 p-0.5 mx-auto mb-3 shadow-md flex items-center justify-center text-3xl">
+                👨‍🎓
               </div>
-            ))}
+              <h3 className="text-lg font-black text-white tracking-wide">C . BHARATH</h3>
+              <p className="text-xs text-slate-300 font-semibold mt-1">Team Member</p>
+              <p className="text-[11px] text-slate-400 mt-2">System Development & Module Testing</p>
+            </div>
+
+            {/* C. GANESH KUMAR RAJU */}
+            <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/60 shadow-lg text-center hover:border-slate-500 transition duration-200 hover:-translate-y-1">
+              <div className="w-16 h-16 rounded-full bg-slate-700 p-0.5 mx-auto mb-3 shadow-md flex items-center justify-center text-3xl">
+                👨‍🎓
+              </div>
+              <h3 className="text-lg font-black text-white tracking-wide">C. GANESH KUMAR RAJU</h3>
+              <p className="text-xs text-slate-300 font-semibold mt-1">Team Member</p>
+              <p className="text-[11px] text-slate-400 mt-2">Frontend Integration & Workflow Design</p>
+            </div>
+
+            {/* C. BALAJI */}
+            <div className="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/60 shadow-lg text-center hover:border-slate-500 transition duration-200 hover:-translate-y-1">
+              <div className="w-16 h-16 rounded-full bg-slate-700 p-0.5 mx-auto mb-3 shadow-md flex items-center justify-center text-3xl">
+                👨‍🎓
+              </div>
+              <h3 className="text-lg font-black text-white tracking-wide">C. BALAJI</h3>
+              <p className="text-xs text-slate-300 font-semibold mt-1">Team Member</p>
+              <p className="text-[11px] text-slate-400 mt-2">Database Modeling & Quality Assurance</p>
+            </div>
           </div>
         </div>
       </section>
@@ -314,20 +318,52 @@ const Home = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-950 py-10 border-t border-slate-900 text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center space-x-3">
-            <img src="/logo.jpeg" alt="Logo" className="w-8 h-8 rounded-full bg-white p-0.5 object-contain" />
-            <div>
-              <p className="text-slate-300 font-semibold">
-                VEMU Institute of Technology • Student Attendance Management System (SAMS)
-              </p>
-              <p className="text-slate-500 text-[11px]">
-                Designed & Developed by <strong className="text-blue-400 font-bold">Vamsi Buthala & Team</strong>
-              </p>
+      <footer className="bg-slate-950 py-12 border-t border-slate-900 text-xs text-slate-400">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center space-x-3">
+              <div className="h-10 w-10 rounded-full bg-white p-1 shadow flex items-center justify-center">
+                <img src="/logo.jpeg" alt="Logo" className="h-full w-full object-contain" />
+              </div>
+              <div>
+                <p className="text-slate-200 font-bold text-sm">
+                  VEMU INSTITUTE OF TECHNOLOGY
+                </p>
+                <p className="text-slate-400 text-xs">
+                  Student Attendance Management System (SAMS)
+                </p>
+              </div>
+            </div>
+            <p className="text-slate-500">© {new Date().getFullYear()} VEMU IT. All rights reserved.</p>
+          </div>
+
+          {/* Dedicated Team Members Details in Footer */}
+          <div className="border-t border-slate-800/80 pt-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-2">
+                  Project Developers:
+                </span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-950 border border-blue-500/50 text-blue-200 font-bold text-xs">
+                    👑 VAMSI BUTHALA <span className="text-[10px] text-blue-400 font-normal">(Team Lead)</span>
+                  </span>
+                  <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 font-semibold text-xs">
+                    C . BHARATH
+                  </span>
+                  <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 font-semibold text-xs">
+                    C. GANESH KUMAR RAJU
+                  </span>
+                  <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 font-semibold text-xs">
+                    C. BALAJI
+                  </span>
+                </div>
+              </div>
+              <div className="text-right text-[11px] text-slate-500">
+                Department of Computer Science & Engineering
+              </div>
             </div>
           </div>
-          <p>© {new Date().getFullYear()} VEMU IT. All rights reserved.</p>
         </div>
       </footer>
     </div>
