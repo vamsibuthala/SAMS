@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   const departments = [
-    { code: 'CSE', name: 'Computer Science & Engineering', icon: '💻', students: '360+' },
-    { code: 'ECE', name: 'Electronics & Communication', icon: '📡', students: '240+' },
-    { code: 'EEE', name: 'Electrical & Electronics', icon: '⚡', students: '180+' },
-    { code: 'MECH', name: 'Mechanical Engineering', icon: '⚙️', students: '120+' },
-    { code: 'CIVIL', name: 'Civil Engineering', icon: '🏗️', students: '120+' },
-    { code: 'AI & DS', name: 'Artificial Intelligence & Data Science', icon: '🤖', students: '120+' },
+    { code: 'MECH', name: 'Mechanical Engineering', icon: '⚙️', students: '180+', desc: 'Robotics, Thermal & CAD/CAM Labs', highlight: true },
+    { code: 'CSE', name: 'Computer Science & Engineering', icon: '💻', students: '360+', desc: 'AI, Cloud & Full-Stack Systems' },
+    { code: 'ECE', name: 'Electronics & Communication', icon: '📡', students: '240+', desc: 'VLSI, Embedded & Signal Processing' },
+    { code: 'EEE', name: 'Electrical & Electronics', icon: '⚡', students: '180+', desc: 'Power Systems & Automation' },
+    { code: 'CIVIL', name: 'Civil Engineering', icon: '🏗️', students: '120+', desc: 'Structural & Surveying Labs' },
+    { code: 'AI & DS', name: 'Artificial Intelligence & Data Science', icon: '🤖', students: '120+', desc: 'Machine Learning & Analytics' },
   ];
 
   const features = [
@@ -211,18 +211,36 @@ const Home = () => {
             {departments.map((dept) => (
               <div
                 key={dept.code}
-                className="p-5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between hover:border-slate-700 transition"
+                className={`p-5 rounded-xl border transition ${
+                  dept.highlight
+                    ? 'bg-gradient-to-br from-slate-900 to-blue-950/60 border-blue-500/60 shadow-lg shadow-blue-500/10 ring-1 ring-blue-500/30'
+                    : 'bg-slate-900 border-slate-800 hover:border-slate-700'
+                } flex flex-col justify-between`}
               >
-                <div className="flex items-center space-x-3.5">
-                  <span className="text-2xl p-2.5 bg-slate-800 rounded-lg">{dept.icon}</span>
-                  <div>
-                    <h3 className="font-bold text-sm text-white">{dept.name}</h3>
-                    <p className="text-xs text-slate-500 mt-0.5">Code: {dept.code}</p>
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center space-x-3.5">
+                    <span className="text-2xl p-2.5 bg-slate-800 rounded-lg">{dept.icon}</span>
+                    <div>
+                      <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                        {dept.name}
+                        {dept.highlight && (
+                          <span className="text-[10px] bg-blue-500 text-white font-extrabold px-1.5 py-0.5 rounded uppercase">
+                            Core
+                          </span>
+                        )}
+                      </h3>
+                      <p className="text-xs text-slate-500 mt-0.5">Code: {dept.code}</p>
+                    </div>
                   </div>
+                  <span className="text-xs font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 rounded">
+                    {dept.students}
+                  </span>
                 </div>
-                <span className="text-xs font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2.5 py-1 rounded-md">
-                  {dept.students}
-                </span>
+                {dept.desc && (
+                  <p className="text-[11px] text-slate-400 mt-3 pt-2.5 border-t border-slate-800/80">
+                    {dept.desc}
+                  </p>
+                )}
               </div>
             ))}
           </div>
@@ -253,8 +271,9 @@ const Home = () => {
                 👨‍💻
               </div>
               <h3 className="text-lg font-black text-white tracking-wide">VAMSI BUTHALA</h3>
-              <p className="text-xs text-blue-300 font-semibold mt-1">Team Lead & Full-Stack Developer</p>
-              <p className="text-[11px] text-slate-400 mt-2">Project Architecture, React & Supabase</p>
+              <p className="text-xs text-blue-300 font-semibold mt-1">Team Lead & Developer</p>
+              <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Mechanical Engineering</p>
+              <p className="text-[11px] text-slate-400 mt-2">Project Architecture, React & Cloud Sync</p>
             </div>
 
             {/* C . BHARATH */}
@@ -264,6 +283,7 @@ const Home = () => {
               </div>
               <h3 className="text-lg font-black text-white tracking-wide">C . BHARATH</h3>
               <p className="text-xs text-slate-300 font-semibold mt-1">Team Member</p>
+              <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Mechanical Engineering</p>
               <p className="text-[11px] text-slate-400 mt-2">System Development & Module Testing</p>
             </div>
 
@@ -274,6 +294,7 @@ const Home = () => {
               </div>
               <h3 className="text-lg font-black text-white tracking-wide">C. GANESH KUMAR RAJU</h3>
               <p className="text-xs text-slate-300 font-semibold mt-1">Team Member</p>
+              <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Mechanical Engineering</p>
               <p className="text-[11px] text-slate-400 mt-2">Frontend Integration & Workflow Design</p>
             </div>
 
@@ -284,6 +305,7 @@ const Home = () => {
               </div>
               <h3 className="text-lg font-black text-white tracking-wide">C. BALAJI</h3>
               <p className="text-xs text-slate-300 font-semibold mt-1">Team Member</p>
+              <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Mechanical Engineering</p>
               <p className="text-[11px] text-slate-400 mt-2">Database Modeling & Quality Assurance</p>
             </div>
           </div>
@@ -359,8 +381,8 @@ const Home = () => {
                   </span>
                 </div>
               </div>
-              <div className="text-right text-[11px] text-slate-500">
-                Department of Computer Science & Engineering
+              <div className="text-right text-xs text-slate-300 font-semibold bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800">
+                ⚙️ Department of Mechanical Engineering (MECH)
               </div>
             </div>
           </div>

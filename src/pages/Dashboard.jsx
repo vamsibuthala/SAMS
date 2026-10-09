@@ -777,7 +777,7 @@ const Dashboard = () => {
       <footer className="bg-slate-900 border-t border-slate-800 text-slate-500 py-4 px-6 text-xs flex flex-col sm:flex-row items-center justify-between gap-2">
         <p>© {new Date().getFullYear()} VEMU SAMS • Student Attendance Management System</p>
         <p className="text-[11px] text-slate-400">
-          Developed by <strong className="text-blue-400 font-semibold">VAMSI BUTHALA</strong>, C . BHARATH, C. GANESH KUMAR RAJU, C. BALAJI
+          Developed by <strong className="text-blue-400 font-semibold">VAMSI BUTHALA</strong>, C . BHARATH, C. GANESH KUMAR RAJU, C. BALAJI (Mechanical Engineering)
         </p>
       </footer>
     </div>
