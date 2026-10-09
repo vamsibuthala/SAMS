@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   const departments = [
-    { code: 'MECH', name: 'Mechanical Engineering', icon: '⚙️', students: '180+', desc: 'Robotics, Thermal & CAD/CAM Labs', highlight: true },
-    { code: 'CSE', name: 'Computer Science & Engineering', icon: '💻', students: '360+', desc: 'AI, Cloud & Full-Stack Systems' },
+    { code: 'CSE', name: 'Computer Science & Engineering', icon: '💻', students: '360+', desc: 'AI, Cloud & Full-Stack Systems', highlight: true },
+    { code: 'MECH', name: 'Mechanical Engineering', icon: '⚙️', students: '180+', desc: 'Robotics, Thermal & CAD/CAM Labs' },
     { code: 'ECE', name: 'Electronics & Communication', icon: '📡', students: '240+', desc: 'VLSI, Embedded & Signal Processing' },
     { code: 'EEE', name: 'Electrical & Electronics', icon: '⚡', students: '180+', desc: 'Power Systems & Automation' },
     { code: 'CIVIL', name: 'Civil Engineering', icon: '🏗️', students: '120+', desc: 'Structural & Surveying Labs' },
@@ -54,11 +54,11 @@ const Home = () => {
       <nav className="bg-slate-900/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-800 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-3.5 group">
-            <div className="h-14 w-14 rounded-full bg-white p-1 shadow-lg ring-2 ring-blue-500/40 flex items-center justify-center">
+            <div className="h-14 w-14 rounded-full bg-white p-0.5 shadow-lg ring-2 ring-blue-500/40 flex items-center justify-center overflow-hidden flex-shrink-0">
               <img
-                src="/logo.jpeg"
+                src="/vemu_emblem.png"
                 alt="VEMU Logo"
-                className="h-full w-full object-contain"
+                className="h-full w-full object-contain rounded-full"
               />
             </div>
             <div>
@@ -272,7 +272,7 @@ const Home = () => {
               </div>
               <h3 className="text-lg font-black text-white tracking-wide">VAMSI BUTHALA</h3>
               <p className="text-xs text-blue-300 font-semibold mt-1">Team Lead & Developer</p>
-              <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Mechanical Engineering</p>
+              <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Computer Science & Engineering</p>
               <p className="text-[11px] text-slate-400 mt-2">Project Architecture, React & Cloud Sync</p>
             </div>
 
@@ -283,7 +283,7 @@ const Home = () => {
               </div>
               <h3 className="text-lg font-black text-white tracking-wide">C . BHARATH</h3>
               <p className="text-xs text-slate-300 font-semibold mt-1">Team Member</p>
-              <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Mechanical Engineering</p>
+              <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Computer Science & Engineering</p>
               <p className="text-[11px] text-slate-400 mt-2">System Development & Module Testing</p>
             </div>
 
@@ -294,7 +294,7 @@ const Home = () => {
               </div>
               <h3 className="text-lg font-black text-white tracking-wide">C. GANESH KUMAR RAJU</h3>
               <p className="text-xs text-slate-300 font-semibold mt-1">Team Member</p>
-              <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Mechanical Engineering</p>
+              <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Computer Science & Engineering</p>
               <p className="text-[11px] text-slate-400 mt-2">Frontend Integration & Workflow Design</p>
             </div>
 
@@ -305,7 +305,7 @@ const Home = () => {
               </div>
               <h3 className="text-lg font-black text-white tracking-wide">C. BALAJI</h3>
               <p className="text-xs text-slate-300 font-semibold mt-1">Team Member</p>
-              <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Mechanical Engineering</p>
+              <p className="text-[11px] text-slate-300 font-medium mt-1">B.Tech • Computer Science & Engineering</p>
               <p className="text-[11px] text-slate-400 mt-2">Database Modeling & Quality Assurance</p>
             </div>
           </div>
@@ -315,11 +315,11 @@ const Home = () => {
       {/* Call to Action Banner */}
       <section className="py-16 bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 border-t border-b border-blue-800">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="w-20 h-20 rounded-full mx-auto mb-4 bg-white p-1.5 ring-4 ring-white/30 shadow-2xl flex items-center justify-center">
+          <div className="w-20 h-20 rounded-full mx-auto mb-4 bg-white p-0.5 ring-4 ring-white/30 shadow-2xl flex items-center justify-center overflow-hidden">
             <img
-              src="/logo.jpeg"
+              src="/vemu_emblem.png"
               alt="VEMU"
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain rounded-full"
             />
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-white">
@@ -344,8 +344,8 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center space-x-3">
-              <div className="h-10 w-10 rounded-full bg-white p-1 shadow flex items-center justify-center">
-                <img src="/logo.jpeg" alt="Logo" className="h-full w-full object-contain" />
+              <div className="h-11 w-11 rounded-full bg-white p-0.5 shadow flex items-center justify-center overflow-hidden flex-shrink-0">
+                <img src="/vemu_emblem.png" alt="Logo" className="h-full w-full object-contain rounded-full" />
               </div>
               <div>
                 <p className="text-slate-200 font-bold text-sm">
@@ -380,9 +380,6 @@ const Home = () => {
                     C. BALAJI
                   </span>
                 </div>
-              </div>
-              <div className="text-right text-xs text-slate-300 font-semibold bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800">
-                ⚙️ Department of Mechanical Engineering (MECH)
               </div>
             </div>
           </div>
