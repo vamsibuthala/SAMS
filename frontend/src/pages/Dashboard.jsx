@@ -203,9 +203,9 @@ const Dashboard = () => {
             <div className="flex items-center space-x-2.5">
               <div className="h-10 w-10 rounded-full bg-white p-0.5 shadow-sm border border-slate-700 flex items-center justify-center overflow-hidden flex-shrink-0">
                 <img
-                  src="/logo.jpeg"
+                  src="/vemu_emblem.png"
                   alt="VEMU Logo"
-                  className="h-full w-full object-contain"
+                  className="h-full w-full object-contain rounded-full"
                 />
               </div>
               <span className="font-extrabold text-xl tracking-tight text-blue-400">VEMU</span>
