@@ -229,6 +229,63 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Project Development Team Section */}
+      <section className="py-20 bg-slate-900 border-t border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-semibold mb-3">
+              <span>👥 Student Innovation</span>
+            </div>
+            <h2 className="text-3xl font-bold text-white">Project Development Team</h2>
+            <p className="text-sm text-slate-400 mt-2">
+              Designed and built by students of VEMU Institute of Technology for the academic community.
+            </p>
+          </div>
+
+          {/* Team Lead Card */}
+          <div className="max-w-md mx-auto mb-10">
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-900/60 to-indigo-900/40 border-2 border-blue-500/50 shadow-xl text-center relative overflow-hidden group">
+              <div className="absolute top-3 right-3 bg-blue-500 text-white text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-0.5 rounded-full">
+                Team Lead
+              </div>
+              <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-400 p-1 mx-auto mb-3 shadow-lg flex items-center justify-center">
+                <span className="text-3xl">👨‍💻</span>
+              </div>
+              <h3 className="text-xl font-black text-white">VAMSI BUTHALA</h3>
+              <p className="text-xs text-blue-300 font-semibold mt-0.5">Project Lead & Full-Stack Developer</p>
+              <p className="text-[11px] text-slate-400 mt-2">
+                Architecture, React Frontend, Supabase Integration & Vercel Deployment
+              </p>
+            </div>
+          </div>
+
+          {/* Teammates Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            {[
+              { name: 'ROUF', role: 'Database & Supabase API', icon: '🗄️' },
+              { name: 'GANI', role: 'Frontend & UI Design', icon: '🎨' },
+              { name: 'GOPI', role: 'Role Hierarchy Logic', icon: '🔐' },
+              { name: 'GOWTHAM', role: 'Testing & Validation', icon: '🧪' },
+              { name: 'BHARATH', role: 'System Documentation', icon: '📑' },
+              { name: 'SASHANTH', role: 'Security & Access Control', icon: '🛡️' },
+              { name: 'ASIF', role: 'Attendance Workflow', icon: '✍️' },
+              { name: 'PAVAN KUMAR', role: 'Reports & Export Module', icon: '📊' }
+            ].map((member, idx) => (
+              <div
+                key={idx}
+                className="p-4 rounded-xl bg-slate-800/60 border border-slate-700/60 text-center hover:border-slate-600 transition hover:-translate-y-0.5"
+              >
+                <div className="w-11 h-11 rounded-full bg-slate-700/60 flex items-center justify-center mx-auto mb-2 text-xl">
+                  {member.icon}
+                </div>
+                <h4 className="font-bold text-sm text-white tracking-wide">{member.name}</h4>
+                <p className="text-[11px] text-slate-400 mt-0.5 leading-snug">{member.role}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Call to Action Banner */}
       <section className="py-16 bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 border-t border-b border-blue-800">
         <div className="max-w-4xl mx-auto px-4 text-center">
@@ -261,9 +318,14 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-3">
             <img src="/logo.jpeg" alt="Logo" className="w-8 h-8 rounded-full bg-white p-0.5 object-contain" />
-            <p className="text-slate-400 font-semibold">
-              VEMU Institute of Technology • Student Attendance Management System (SAMS)
-            </p>
+            <div>
+              <p className="text-slate-300 font-semibold">
+                VEMU Institute of Technology • Student Attendance Management System (SAMS)
+              </p>
+              <p className="text-slate-500 text-[11px]">
+                Designed & Developed by <strong className="text-blue-400 font-bold">Vamsi Buthala & Team</strong>
+              </p>
+            </div>
           </div>
           <p>© {new Date().getFullYear()} VEMU IT. All rights reserved.</p>
         </div>

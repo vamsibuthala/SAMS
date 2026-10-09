@@ -56,11 +56,11 @@ const Login = () => {
       <div className="relative z-10 bg-slate-900/90 backdrop-blur-xl rounded-3xl shadow-2xl w-full max-w-md overflow-hidden border border-slate-700/70 text-slate-100">
         {/* College Branding Header with Logo */}
         <div className="pt-8 pb-6 px-8 text-center border-b border-slate-800">
-          <div className="inline-block p-2 bg-white rounded-2xl shadow-xl ring-2 ring-blue-500/40 mb-3.5">
+          <div className="inline-block p-1 bg-white rounded-2xl shadow-2xl ring-4 ring-blue-500/30 mb-3.5">
             <img
               src="/logo.jpeg"
               alt="VEMU College Logo"
-              className="w-20 h-20 object-contain rounded-xl"
+              className="w-24 h-24 sm:w-28 sm:h-28 object-contain rounded-xl"
             />
           </div>
           <h1 className="text-xl font-black tracking-tight text-white">
